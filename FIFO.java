@@ -15,7 +15,8 @@ public class FIFO {
 
 
     public void put(String value){
-        if(tail + 1 == head && buffer[head] != null){
+        if((tail + 1 == head || tail == 0 && head == 0) && buffer[head] != null){
+
             System.out.println("DATA LOST");
             return;
         }
