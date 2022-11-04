@@ -9,11 +9,11 @@ import java.util.Scanner;
 
 public class main {
     public static void main(String[] args) throws IOException {
-        FIFO fifo = new FIFO(10);
+        FIFO fifo = new FIFO();
         Random rd = new Random();
         Scanner sc = new Scanner(System.in);
 
-        BufferedReader br = new BufferedReader(new FileReader("src/FIFO/karaoke.txt"));
+        BufferedReader br = new BufferedReader(new FileReader("karaoke.txt"));
 
         String line = br.readLine();
 
@@ -25,16 +25,16 @@ public class main {
             if (in.equals("")) {
                 if (random == 0) {
                     System.out.println("PUT");
-                    fifo.put(line);
+                    fifo.append(line);
 
                     line = br.readLine();
                 } else {
                     System.out.println("TAKE");
-                    fifo.take();
+                    fifo.get();
                 }
 
             }else{
-               fifo.display();
+               fifo.see();
             }
         }
 
