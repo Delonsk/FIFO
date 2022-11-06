@@ -1,7 +1,5 @@
-package FIFO;
 
 import java.io.BufferedReader;
-import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.Random;
@@ -13,7 +11,7 @@ public class main {
         Random rd = new Random();
         Scanner sc = new Scanner(System.in);
 
-        BufferedReader br = new BufferedReader(new FileReader("src/FIFO/karaoke.txt"));
+        BufferedReader br = new BufferedReader(new FileReader("karaoke.txt"));
 
         String line = br.readLine();
 
@@ -24,17 +22,17 @@ public class main {
 
             if (in.equals("")) {
                 if (random == 0) {
-                    System.out.println("PUT");
-                    fifo.put(line);
+                    System.out.println("APPEND");
+                    fifo.append(line);
 
                     line = br.readLine();
                 } else {
-                    System.out.println("TAKE");
-                    fifo.take();
+                    System.out.println("GET");
+                    fifo.get();
                 }
 
             }else{
-               fifo.display();
+                fifo.see();
             }
         }
 
