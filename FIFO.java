@@ -90,7 +90,15 @@ public class FIFO {
     }
 
     public int freeCap(){
-        return bufferSize - (headCount - tailCount);
+        int i = tail;
+        int free = 0;
+
+        while(i != head){
+            free++;
+            i = i == buffer.length-1 ? 0 : i+1;
+        }
+
+        return free;
     }
 
     public void clear(){
