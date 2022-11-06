@@ -23,7 +23,7 @@ public class main {
             String in = sc.nextLine();
 
             if (in.equals("")) {
-                if (random == 1) {
+                if (random == 0) {
                     System.out.println("PUT");
                     fifo.append(line);
 

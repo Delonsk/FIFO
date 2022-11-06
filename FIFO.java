@@ -8,25 +8,19 @@ public class FIFO {
     protected int tail;
     protected int bufferSize;
     protected String[] buffer;
-    protected int headCount;
-    protected int tailCount;
 
     protected Scanner sc = new Scanner(System.in);
 
     public FIFO() {
         head = 0;
         tail = 0;
-
-        headCount = 0;
-        tailCount = 0;
-
         bufferSize = isInputCorrect();
         this.buffer = new String[bufferSize];
     }
 
 
     public void append(String value){
-        if(headCount - tailCount == bufferSize){
+        if((tail + 1 == head || tail == 0 && head == 0) && buffer[head] != null){
 
             System.out.println("DATA LOST");
             return;
@@ -34,46 +28,25 @@ public class FIFO {
 
         buffer[head] = value;
         head = head == bufferSize-1 ? 0 : head+1;
-        headCount++;
-
-        System.out.println("Head: " + head);
-        System.out.println("Tail: " + tail);
-        System.out.println("HeadCount: " + headCount);
-        System.out.println("TailCount: " + tailCount);
-
-        System.out.println(Arrays.toString(buffer));
     }
 
     public void get(){
-        if(headCount - tailCount == 0){
+        if(tail == head && buffer[tail] == null){
             System.out.println("NO DATA");
             return;
         }
 
         System.out.println(buffer[tail]);
         tail = tail == bufferSize-1 ? 0 : tail+1;
-        tailCount++;
-
-        System.out.println("Head: " + head);
-        System.out.println("Tail: " + tail);
-        System.out.println("HeadCount: " + headCount);
-        System.out.println("TailCount: " + tailCount);
-
-        System.out.println(Arrays.toString(buffer));
     }
 
     public void see(){
+        int i = tail;
 
-        if (headCount - tailCount == bufferSize){
-            System.out.println(Arrays.toString(buffer) );
-        }else{
-            int i = tail;
+        while(i != head){
+            System.out.print(buffer[i] + " ");
 
-            while(i != head){
-                System.out.print(buffer[i] + " ");
-
-                i = i == bufferSize-1 ? 0 : i+1;
-            }
+            i = i == bufferSize-1 ? 0 : i+1;
         }
     }
 
@@ -111,11 +84,7 @@ public class FIFO {
         return "FIFO{" +
                 "head=" + head +
                 ", tail=" + tail +
-                ", bufferSize=" + bufferSize +
                 ", buffer=" + Arrays.toString(buffer) +
-                ", headCount=" + headCount +
-                ", tailCount=" + tailCount +
-                ", sc=" + sc +
                 '}';
     }
 
